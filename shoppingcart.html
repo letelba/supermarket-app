@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="addApple" onclick="addApple()">Apple</button>
+    <button onclick="addTomato()">tomato</button>
+    <button onclick="addEgg()">Egg</button>
+    <button onclick="clearCart()">Clear</button>
+    <button onclick="addToReceipt()">Receipt</button>
+    <hr />
+    <div id="cart"></div>
+    <hr />
+    <div id="receipt"></div>
+    <script>
+      let cart = [
+        {
+          name: "apple",
+          price: "10",
+          quantity: 2,
+        },
+        {
+          name: "tomato",
+          price: "5",
+          quantity: 0,
+        },
+        {
+          name: "Egg",
+          price: "5",
+          quantity: 0,
+        },
+      ];
+
+      function addApple() {
+        let obj = cart.find((f) => f.name == "apple");
+        console.log(obj);
+        obj.quantity += 1;
+        console.log(obj);
+
+        addToCart();
+      }
+
+      function addTomato() {
+        let obj = cart.find((f) => f.name == "tomato");
+        console.log(obj);
+        obj.quantity += 1;
+        console.log(obj);
+
+        addToCart();
+      }
+
+      function addEgg() {
+        let obj = cart.find((f) => f.name == "Egg");
+        console.log(obj);
+        obj.quantity += 1;
+        console.log(obj);
+
+        addToCart();
+      }
+
+      function clearCart() {
+        cart = [];
+        addToCart();
+      }
+
+      function addToCart() {
+        document.getElementById("cart").innerHTML = "";
+        cart.forEach(function (cart) {
+          let element = document.getElementById("cart");
+          let div = document.createElement("div");
+          div.innerText =
+            "Name: " +
+            cart.name +
+            " Price: " +
+            cart.price +
+            " Quantity: " +
+            cart.quantity;
+          element.appendChild(div);
+        });
+      }
+
+      function addToReceipt() {
+        document.getElementById("receipt").innerHTML = "";
+
+        let element = document.getElementById("receipt");
+        let counter = 0;
+
+        cart.forEach(function (cart) {
+          let div = document.createElement("div");
+
+          div.innerText =
+            "Name: " +
+            cart.name +
+            " $" +
+            cart.price +
+            " * " +
+            cart.quantity +
+            " = $" +
+            cart.quantity * cart.price;
+          element.appendChild(div);
+
+          counter = counter + cart.quantity * cart.price;
+        });
+        let divtotal = document.createElement("div");
+        divtotal.textContent = "total = $" + counter;
+        element.appendChild(divtotal);
+      }
+
+      addToCart();
+    </script>
+  </body>
+</html>
